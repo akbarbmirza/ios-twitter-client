@@ -13,6 +13,7 @@
 		549445371E4BD2C600909615 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 549445351E4BD2C600909615 /* Main.storyboard */; };
 		549445391E4BD2C600909615 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 549445381E4BD2C600909615 /* Assets.xcassets */; };
 		5494453C1E4BD2C600909615 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5494453A1E4BD2C600909615 /* LaunchScreen.storyboard */; };
+		54C07B3D1E4BE4F6006F10FD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C07B3C1E4BE4F6006F10FD /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		549445381E4BD2C600909615 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5494453B1E4BD2C600909615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5494453D1E4BD2C600909615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54C07B3C1E4BE4F6006F10FD /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C7618A4C65FED6C618D80131 /* Pods-TwitterClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-TwitterClient/Pods-TwitterClient.release.xcconfig"; sourceTree = "<group>"; };
 		F854377CDA9D788513E424E6 /* Pods_TwitterClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -69,6 +71,7 @@
 		549445301E4BD2C600909615 /* TwitterClient */ = {
 			isa = PBXGroup;
 			children = (
+				54C07B3C1E4BE4F6006F10FD /* LoginViewController.swift */,
 				549445311E4BD2C600909615 /* AppDelegate.swift */,
 				549445331E4BD2C600909615 /* ViewController.swift */,
 				549445351E4BD2C600909615 /* Main.storyboard */,
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54C07B3D1E4BE4F6006F10FD /* LoginViewController.swift in Sources */,
 				549445341E4BD2C600909615 /* ViewController.swift in Sources */,
 				549445321E4BD2C600909615 /* AppDelegate.swift in Sources */,
 			);
@@ -379,6 +383,7 @@
 				549445421E4BD2C600909615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
