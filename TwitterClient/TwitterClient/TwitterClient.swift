@@ -93,6 +93,25 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
+    func tweetFromTimeline(withID: Int, success: @escaping (Tweet) -> (Void), failure: @escaping (Error) -> (Void)) {
+       
+        get("1.1/statuses/home_timeline.json",
+            parameters: ["max_id": withID, "count": 1],
+            progress: nil,
+            success: { (task: URLSessionDataTask, response: Any?) in
+                
+                let dictionary = (response as! [NSDictionary]).first
+                let tweet = Tweet(dictionary: dictionary!)
+                success(tweet)
+                
+        }) { (task: URLSessionDataTask?, error: Error) in
+            
+            // call did not succeed
+            failure(error)
+            
+        }
+    }
+    
     func currentAccount(success: @escaping (User) -> (Void), failure: @escaping (Error) -> (Void)) {
         
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
@@ -148,7 +167,9 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func retweet(id: Int, success: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void) {
         
-        post("1.1/statuses/retweet/:\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        
+        
+        post("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
             let tweetDict = response as! NSDictionary
             
@@ -164,22 +185,42 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
     
-    func unretweet(id: Int, success: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void) {
+    func unretweet(tweet: Tweet, success: @escaping (Tweet) -> Void, failure: @escaping (Error) -> Void) {
         
-        post("1.1/statuses/retweet/:\(id).json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+        let id = tweet.isRetweeted! ? tweet.originalTweetID : tweet.id
+        print("isRetweeted: \(tweet.isRetweeted!)")
+        print("originalTweetID: \(tweet.originalTweetID!)")
+        print("tweetID: \(tweet.id!)")
+        print("ID: \(id!)")
+        
+        get("1.1/statuses/show.json?id=\(id!)", parameters: ["include_my_retweet": true], progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
             
-            let tweetDict = response as! NSDictionary
-            
-            let tweet = Tweet(dictionary: tweetDict)
-            
-            success(tweet)
+            let dictionary = response as! NSDictionary
+            if let currentUserRetweetID = dictionary.value(forKeyPath: "current_user_retweet.id") {
+                
+                self.post("1.1/statuses/destroy/\(currentUserRetweetID).json",
+                    parameters: nil,
+                    progress: nil,
+                    success: { (task: URLSessionDataTask, response: Any?) in
+                    
+                    self.tweetFromTimeline(withID: tweet.id!, success: success, failure: failure)
+                    
+                },
+                    failure: { (task: URLSessionDataTask?, error: Error) in
+                        
+                        // code did not succeed
+                        failure(error)
+                })
+                
+            } else {
+                preconditionFailure("Error: couldn't get current_user_retweet.id")
+            }
             
         }) { (task: URLSessionDataTask?, error: Error) in
             
-            // call did not succeed
             failure(error)
+            
         }
-        
     }
     
 }

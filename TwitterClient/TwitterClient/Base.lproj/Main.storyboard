@@ -64,7 +64,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fz5-U0-TjQ" id="HHO-OA-ryT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="139.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="retweet-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Thh-bo-Cdg">
@@ -112,7 +112,7 @@
                                                         <constraint firstAttribute="width" constant="30" id="h4h-Wk-q6u"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1CW-CF-dkp">
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1CW-CF-dkp">
                                                     <rect key="frame" x="146" y="105.5" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="SrY-ft-0Td"/>
@@ -123,7 +123,7 @@
                                                         <action selector="onRetweet:" destination="fz5-U0-TjQ" eventType="touchUpInside" id="OXM-WI-CRB"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mC-tF-58b">
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9mC-tF-58b">
                                                     <rect key="frame" x="236" y="105.5" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="67s-jX-hKO"/>
@@ -163,7 +163,7 @@
                                                 <constraint firstItem="Bsy-X2-q3a" firstAttribute="leading" secondItem="HHO-OA-ryT" secondAttribute="leading" constant="8" id="ALF-Uf-mq0"/>
                                                 <constraint firstItem="fTg-ob-lqY" firstAttribute="top" secondItem="WRS-Dh-m6L" secondAttribute="bottom" constant="4" id="AYY-tV-meY"/>
                                                 <constraint firstAttribute="trailing" secondItem="JZI-Ac-TLN" secondAttribute="trailing" constant="8" id="BOb-7c-XEk"/>
-                                                <constraint firstItem="Thh-bo-Cdg" firstAttribute="top" secondItem="HHO-OA-ryT" secondAttribute="top" constant="8" id="Bza-nx-p1U"/>
+                                                <constraint firstItem="Thh-bo-Cdg" firstAttribute="top" secondItem="HHO-OA-ryT" secondAttribute="top" priority="250" constant="8" id="Bza-nx-p1U"/>
                                                 <constraint firstItem="fTg-ob-lqY" firstAttribute="leading" secondItem="Bsy-X2-q3a" secondAttribute="trailing" constant="8" id="Eam-QB-1aD"/>
                                                 <constraint firstItem="1CW-CF-dkp" firstAttribute="leading" secondItem="aA8-OO-TFr" secondAttribute="trailing" constant="60" id="EvH-6n-Ev6"/>
                                                 <constraint firstItem="DJ4-FT-8ry" firstAttribute="centerY" secondItem="Thh-bo-Cdg" secondAttribute="centerY" id="K7E-Em-FhL"/>
@@ -192,6 +192,7 @@
                                             <outlet property="retweetLabel" destination="DJ4-FT-8ry" id="7Aj-sd-2IT"/>
                                             <outlet property="retweetedImageView" destination="Thh-bo-Cdg" id="C4v-Ru-lo2"/>
                                             <outlet property="timeStampLabel" destination="JZI-Ac-TLN" id="kiS-ZJ-ego"/>
+                                            <outlet property="topConstraintToRetweetImage" destination="Bza-nx-p1U" id="5FG-aK-US9"/>
                                             <outlet property="tweetDescriptionLabel" destination="fTg-ob-lqY" id="vCS-8j-Uex"/>
                                             <outlet property="userNameLabel" destination="WRS-Dh-m6L" id="xeO-G2-zQF"/>
                                             <outlet property="userScreenNameLabel" destination="AfW-Om-Son" id="QP8-w2-vre"/>
@@ -228,7 +229,7 @@
             <objects>
                 <navigationController storyboardIdentifier="TweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="vA5-R6-Jfx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Mij-bZ-EnE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mij-bZ-EnE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
