@@ -121,7 +121,7 @@ class Tweet: NSObject {
     }
     
     func format(count: Int) -> String {
-        if count < 1000 || count == 0 {
+        if count < 10000 || count == 0 {
             return "\(Int(count))"
         } else {
             let newCount = Double(count) / 1000.0

@@ -58,16 +58,37 @@ class TweetsViewController: UIViewController {
             print(error.localizedDescription)
         }
     }
-    
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        // TODO: Get the right view controller
+        
+        if segue.identifier == "tweetDetails" {
+            
+            // create a variable for our detail view controller
+            let detailVC = segue.destination as! TweetDetailViewController
+            
+            let cell = sender as! UITableViewCell
+            if let indexPath = tableView.indexPath(for: cell) {
+                let tweet = self.tweets[indexPath.row]
+                detailVC.tweet = tweet
+            }
+            
+            
+        }
+        
+        
+        print("prepare for segue call")
+        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }
 
@@ -110,21 +131,21 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
 extension TweetsViewController: TweetCellDelegate {
     
     func favoriteTapped(tweet: Tweet?, indexPath: IndexPath) {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         let tweetIndex = self.tweets.index(of: tweet!)
         
         if (tweet?.isFavorited)! {
             TwitterClient.sharedInstance?.unfavorite(id: (tweet?.id)!, success: { (tweet: Tweet) in
-//                cell.tweet = tweet
                 self.tweets[tweetIndex!] = tweet
+                cell.tweet = tweet
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
             })
         } else {
             TwitterClient.sharedInstance?.favorite(id: (tweet?.id)!, success: { (tweet: Tweet) in
-//                cell.tweet = tweet
                 self.tweets[tweetIndex!] = tweet
+                cell.tweet = tweet
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
@@ -135,21 +156,22 @@ extension TweetsViewController: TweetCellDelegate {
     
     func retweetTapped(tweet: Tweet?, indexPath: IndexPath) {
         
-//        let cell = tableView.cellForRow(at: indexPath) as! TweetCell
+        let cell = tableView.cellForRow(at: indexPath) as! TweetCell
         let tweetIndex = self.tweets.index(of: tweet!)
         
         if (tweet?.isRetweeted)! {
             TwitterClient.sharedInstance?.unretweet(tweet: tweet!, success: { (tweet: Tweet) in
-//                cell.tweet = tweet
                 self.tweets[tweetIndex!] = tweet
+                cell.tweet = tweet
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
             })
         } else {
             TwitterClient.sharedInstance?.retweet(id: (tweet?.id)!, success: { (tweet: Tweet) in
-//                cell.tweet = tweet
+                
                 self.tweets[tweetIndex!] = tweet
+                cell.tweet = tweet
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
             }, failure: { (error: Error) in
                 print(error.localizedDescription)
